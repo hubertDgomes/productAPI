@@ -8,6 +8,6 @@ const router = express.Router()
 router.post("/send" , productSend)
 router.get("/show" , productShow)
 router.post("/createSub" , subCatControllers)
-router.post("/subdelete/:id" , subCatDelController)
+router.delete("/subdelete/:id" , subCatDelController)
 
 export default router
