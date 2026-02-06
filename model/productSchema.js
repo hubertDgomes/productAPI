@@ -2,15 +2,19 @@ import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
 const productSchema = new Schema({
-    title : {
-        type : String,
-        required : true,
-        unique : true
-    },
-    description : {
-        type : String,
-        required : true,
-    },
-})
+  name: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  subCategoryId: {
+    type: mongoose.Schema.Types.ObjectId,
+    def: "subCategories"
+  },
+  
+});
 
-export default mongoose.model("productDatas" , productSchema)
+export default mongoose.model("productDatas", productSchema);
