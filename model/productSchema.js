@@ -10,11 +10,33 @@ const productSchema = new Schema({
     type: String,
     required: true,
   },
-  subCategoryId: {
-    type: mongoose.Schema.Types.ObjectId,
-    def: "subCategories"
+  category: {
+    type: String
   },
-  
+  image: {
+    type: String
+  },
+  price: {
+    type: Number,
+    required: true
+  },
+  size: {
+    type: String,
+    trim: true,
+  },
+  color: {
+    type: String,
+    trim: true,
+  },
+  ram: {
+    type: String,
+    trim: true,
+  },
+  storage: {
+    type: String,
+    trim: true,
+  },
+
 });
 
 export default mongoose.model("productDatas", productSchema);

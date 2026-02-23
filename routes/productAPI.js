@@ -1,15 +1,26 @@
 import express from "express"
 import productSend from "../controllers/productSend.js"
 import productShow from "../controllers/productShow.js"
-import subCatControllers from "../controllers/subCatControllers.js"
-import subCatDelController from "../controllers/subCatDelController.js"
-import subCatUpdate from "../controllers/subCatUpdate.js"
+import multer from "multer"
+// const upload = multer({ dest: 'uploads/' })
 const router = express.Router()
 
-router.post("/send" , productSend)
-router.get("/show" , productShow)
-router.post("/createSub" , subCatControllers)
-router.patch("/subupdate/:id" , subCatUpdate)
-router.delete("/subdelete/:id" , subCatDelController)
+// Storage configuration
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "/uploads");
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix =
+      Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, file.fieldname + "-" + uniqueSuffix);
+  },
+});
+
+const upload = multer({ storage });
+
+router.post("/send", upload.single('image'), productSend)
+router.get("/show", productShow)
+
 
 export default router
