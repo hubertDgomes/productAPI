@@ -11,7 +11,7 @@ const productSend = async (req, res) => {
     ram,
     storage, } = req.body
 
-    console.log(req.file.filename);
+    // console.log(req.file.filename);
     
 
   if (!name) {
