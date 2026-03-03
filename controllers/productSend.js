@@ -1,3 +1,4 @@
+import imageUpload from "../middleware/cloudinaryMiddleware.js";
 import productSchema from "../model/productSchema.js"
 
 const productSend = async (req, res) => {
@@ -12,6 +13,9 @@ const productSend = async (req, res) => {
     storage, } = req.body
 
     // console.log(req.file.filename);
+
+    const imgPath = req.file.path;
+    const imgUrl = await imageUpload(imgPath)
     
 
   if (!name) {
@@ -28,7 +32,7 @@ const productSend = async (req, res) => {
     name,
     description,
     category,
-    image: `http://localhost:3000/uploads/${req.file.filename}`,
+    image : imgUrl.secure_url,
     price,
     size,
     color,

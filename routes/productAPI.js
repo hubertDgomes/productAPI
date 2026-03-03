@@ -2,7 +2,7 @@ import express from "express"
 import productSend from "../controllers/productSend.js"
 import productShow from "../controllers/productShow.js"
 import multer from "multer"
-// const upload = multer({ dest: 'uploads/' })
+import productDel from "../controllers/productDel.js"
 const router = express.Router()
 
 // Storage configuration
@@ -21,6 +21,6 @@ const upload = multer({ storage });
 
 router.post("/send", upload.single('image'), productSend)
 router.get("/show", productShow)
-
-
+router.delete("/del/:id", productDel)
+    
 export default router

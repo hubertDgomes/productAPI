@@ -4,6 +4,8 @@ const app = express()
 import routes from "./routes/allRoutes.js"
 import productAPI from "./routes/productAPI.js"
 import session from "express-session"
+import cors from "cors";
+
 
 import path from "path"
 import { fileURLToPath } from "url"
@@ -13,6 +15,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 app.use(express.json())
+app.use(cors())
 
 app.use(session({
   secret: 'keyboard cat',
@@ -25,6 +28,16 @@ app.get("/",(req,res)=>{
     res.send("Server is running!")
 })
 
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}))
+
+app.get("/",(req,res)=>{
+    res.send("Server is running!")
+})
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 
